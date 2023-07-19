@@ -1,11 +1,13 @@
 package com.example.demo.models;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,6 +19,8 @@ import java.util.Set;
 @Table(name = "Subscriber")
 public class Subscriber {
     //subsc id, subription id , pt id
+    @Id
+    @GeneratedValue
     private Integer subscriber_Id;
     private Integer subscription_Id;
     private Integer pt_id;
@@ -33,7 +37,7 @@ public class Subscriber {
             joinColumns = @JoinColumn(name = "subscriber_id"),
             inverseJoinColumns = @JoinColumn(name = "session_booking_id")
     )
-    private List<SessionBooking> sessionBookings;
+    private List<SessionBooking> sessionBookings= new ArrayList<>();
 
     @OneToOne(mappedBy = "subscriber")
     private Subscription subscription;
@@ -44,7 +48,7 @@ public class Subscriber {
             joinColumns = @JoinColumn(name = "subscriber_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private List<Userr> users;
+    private List<Userr> users= new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -52,6 +56,6 @@ public class Subscriber {
             joinColumns = @JoinColumn(name = "subscriber_id"),
             inverseJoinColumns = @JoinColumn(name = "feedback_id")
     )
-    private List<Feedback> feedbacks;
+    private List<Feedback> feedbacks= new ArrayList<>();
 
 }

@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -29,10 +31,10 @@ public class SessionBooking {
             joinColumns = @JoinColumn(name = "booking_id"),
             inverseJoinColumns = @JoinColumn(name = "session_id")
     )
-    private Set<Session> sessions;
+    private Set<Session> sessions= new HashSet<>();
 
     @ManyToMany(mappedBy = "sessionBookings")
-    private List<Subscriber> subscribers;
+    private List<Subscriber> subscribers= new ArrayList<>();
 
 
 }

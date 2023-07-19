@@ -3,6 +3,8 @@ package com.example.demo.models;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class Registered_In_Gym {
@@ -15,5 +17,5 @@ public class Registered_In_Gym {
             joinColumns = @JoinColumn(name = "registered_in_gym_id"),
             inverseJoinColumns = @JoinColumn(name = "place_of_service_id")
     )
-    private Set<PlaceOfService> placesOfService;
+    private List<PlaceOfService> placesOfService= new ArrayList<>();
 }

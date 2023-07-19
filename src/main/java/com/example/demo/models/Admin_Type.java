@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,6 +22,6 @@ public class Admin_Type {
     private String admin_type;
 
     @OneToMany(mappedBy = "adminType", cascade = CascadeType.ALL)
-    private List<Admin_Role> adminRoles;
+    private List<Admin_Role> adminRoles= new ArrayList<>();
 
 }

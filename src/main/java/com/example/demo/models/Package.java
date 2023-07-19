@@ -24,4 +24,6 @@ public class Package {
 
     @OneToMany(mappedBy = "package", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Subscription> subscriptions = new ArrayList<>();
+@OneToMany(mappedBy = "PlaceOfService", cascade = CascadeType.ALL, orphanRemoval = true)
+private List<PlaceOfService> Place = new ArrayList<>();
 }

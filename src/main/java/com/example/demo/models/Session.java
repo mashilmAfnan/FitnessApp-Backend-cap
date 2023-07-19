@@ -44,10 +44,10 @@ public class Session {
             joinColumns = @JoinColumn(name = "session_id"),
             inverseJoinColumns = @JoinColumn(name = "place_id")
     )
-    private Set<PlaceOfService> placesOfService;
+    private Set<PlaceOfService> placesOfService = new HashSet<>();
 
     @ManyToMany(mappedBy = "sessions")
-    private Set<SessionBooking> bookings;
+    private Set<SessionBooking> bookings = new HashSet<>();
 
 
 

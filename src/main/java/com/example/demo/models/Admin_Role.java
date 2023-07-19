@@ -1,6 +1,7 @@
 package com.example.demo.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Admin_Role {
@@ -20,7 +21,7 @@ private Integer user_info_id;
             joinColumns = @JoinColumn(name = "admin_role_id"),
             inverseJoinColumns = @JoinColumn(name = "placeofservice_id")
     )
-    private List<PlaceOfService> placesOfService;
+    private List<PlaceOfService> placesOfService = new ArrayList<>();
 
 
 }

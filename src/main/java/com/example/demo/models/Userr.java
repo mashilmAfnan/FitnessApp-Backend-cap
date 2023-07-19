@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 //import javax.persistence.Table;
 
@@ -23,8 +24,8 @@ public class Userr {
     private UserInfo userInfo;
 
     @OneToMany(mappedBy = "user")
-    private List<Subscription> subscriptions;
+    private List<Subscription> subscriptions= new ArrayList<>();
 
     @ManyToMany(mappedBy = "users")
-    private List<Subscriber> subscribers;
+    private List<Subscriber> subscribers= new ArrayList<>();
 }

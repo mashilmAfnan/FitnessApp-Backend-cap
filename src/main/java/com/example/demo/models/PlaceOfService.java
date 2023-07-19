@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,12 +45,12 @@ public class PlaceOfService {
     private Set<Room> room = new HashSet<>();
 
  @ManyToMany(mappedBy = "placesOfService")
- private List<Admin_Role> adminRoles;
+ private List<Admin_Role> adminRoles= new ArrayList<>();
 
  @ManyToMany(mappedBy = "placesOfService")
- private Set<Registered_In_Gym> registeredInGyms;
+ private List<Registered_In_Gym> registeredInGyms= new ArrayList<>();
 
  @ManyToMany(mappedBy = "placesOfService")
- private Set<Session> sessions;
+ private List<Session> sessions= new ArrayList<>();
 
 }

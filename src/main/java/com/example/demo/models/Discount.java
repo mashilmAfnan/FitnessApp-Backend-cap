@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,5 +23,5 @@ public class Discount {
     private Integer Percentage;
 
     @OneToMany(mappedBy = "discount")
-    private List<Subscription> subscriptions;
+    private List<Subscription> subscriptions= new ArrayList<>();
 }

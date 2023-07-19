@@ -27,5 +27,5 @@ public class Room {
     private Set<PlaceOfService> place = new HashSet<>();
 
     @ManyToMany(mappedBy = "rooms")
-    private Set<Session> sessions;
+    private Set<Session> sessions = new HashSet<>();
 }

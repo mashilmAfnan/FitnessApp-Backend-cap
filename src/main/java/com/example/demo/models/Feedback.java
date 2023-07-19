@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -23,6 +24,6 @@ public class Feedback {
     private LocalDate date;
 
     @ManyToMany(mappedBy = "feedbacks")
-    private List<Subscriber> subscribers;
+    private List<Subscriber> subscribers= new ArrayList<>();
 
 }
