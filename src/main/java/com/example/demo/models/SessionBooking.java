@@ -22,19 +22,24 @@ import java.util.Set;
 public class SessionBooking {
     @Id
     @GeneratedValue
-    private Integer Id;
+    @Column(name="session_booking_id")
+    private Integer id;
     private LocalDate session_date;
     private LocalTime session_time;
     @ManyToMany
     @JoinTable(
             name = "session_booking_session",
             joinColumns = @JoinColumn(name = "booking_id"),
-            inverseJoinColumns = @JoinColumn(name = "session_id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "session_id")    )
     private Set<Session> sessions= new HashSet<>();
 
-    @ManyToMany(mappedBy = "sessionBookings")
-    private List<Subscriber> subscribers= new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "subscriber_session_booking",
+            joinColumns = @JoinColumn(name = "session_booking_id"),
+            inverseJoinColumns = @JoinColumn(name = "subscriber_id")
+    )
+    private Set<Subscriber> subscribers = new HashSet<>();
 
 
 }

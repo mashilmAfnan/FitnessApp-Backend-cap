@@ -1,14 +1,24 @@
 package com.example.demo.models;
 
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "Registered_In_Gym")
 public class Registered_In_Gym {
     //both are fks
+    @Id
+    @GeneratedValue
     private Integer admin_id;
     private  Integer place_id;
     @ManyToMany

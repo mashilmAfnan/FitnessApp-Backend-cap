@@ -12,6 +12,8 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
+import static org.hibernate.cfg.AvailableSettings.USER;
+
 
 @Data
     @Builder
@@ -19,30 +21,32 @@ import java.util.List;
     @AllArgsConstructor
 @Entity
 @Table (name = "user_info")
-public class UserInfo implements UserDetails {
+public class RoleInfo implements UserDetails {
 
 
     @Id
     @GeneratedValue
-    private Integer Id;
+    private Integer id;
    private String fname;
    private String lname;
    private String email;
    private String password;
-   private String BloodType;
+   private String bloodType;
    private String phoneNo;
    private String city;
    private String emergencyPhoneNo;
     @OneToOne(mappedBy = "userInfo", cascade = CascadeType.ALL)
     private Admin_Role admin;
     @OneToOne(mappedBy = "userInfo", cascade = CascadeType.ALL)
-    private Userr user;
-  //  but it should start from 1 not 0
-@Enumerated(EnumType.ORDINAL)
+    private UserRole user;
+
+
+   // but it should start from 1 not 0
+@Enumerated(EnumType.STRING)
 private Role role;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return role.getAuthorities();
     }
  @Override
   public String getPassword(){

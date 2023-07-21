@@ -20,7 +20,8 @@ import java.util.Set;
 public class Session {
     @Id
     @GeneratedValue
-    private Integer Id;
+    @Column(name="session_id")
+    private Integer id;
     private LocalDate session_date;
     private LocalTime time;
 
@@ -36,7 +37,7 @@ public class Session {
                joinColumns = @JoinColumn(name="session_id"),
             inverseJoinColumns= @JoinColumn(name="session_booking_id")
     )
-    private Set<Room> sessionBooking = new HashSet<>();
+    private Set<SessionBooking> SessionBooking = new HashSet<>();
 
     @ManyToMany
     @JoinTable(
@@ -47,7 +48,8 @@ public class Session {
     private Set<PlaceOfService> placesOfService = new HashSet<>();
 
     @ManyToMany(mappedBy = "sessions")
-    private Set<SessionBooking> bookings = new HashSet<>();
+    private Set<Room> rooms = new HashSet<>();
+
 
 
 

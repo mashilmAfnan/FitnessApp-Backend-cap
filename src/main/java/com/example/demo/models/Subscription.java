@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
@@ -17,7 +18,7 @@ import java.time.LocalDate;
 public class Subscription {
     @Id
     @GeneratedValue
-    private Integer Id;
+    private Integer id;
     private LocalDate start_date;
     private LocalDate end_date;
 
@@ -26,14 +27,14 @@ public class Subscription {
     private Package packageEntity;
 
     @ManyToOne
-    @JoinColumn(name = "discount_id")
+    @JoinColumn(name = "discount")
     private Discount discount;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Userr user;
 
-    @OneToOne
-    @JoinColumn(name = "subscriber_id")
+    @ManyToMany(mappedBy = "subscriptions")
+    private List<UserRole> users;
+
+
+    @OneToOne(mappedBy = "subscription")
     private Subscriber subscriber;
 }

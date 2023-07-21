@@ -19,13 +19,17 @@ import java.util.Set;
 public class Room {
     @Id
     @GeneratedValue
-    private Integer RoomNo;
+    @Column(name = "room_no")
+    private Integer roomNo;
     private String purpose;
     private Integer capacity;
     private  Boolean availability;
     @ManyToMany
-    private Set<PlaceOfService> place = new HashSet<>();
-
-    @ManyToMany(mappedBy = "rooms")
+    @JoinTable(
+            name = "room_session",
+            joinColumns = @JoinColumn(name = "room_id"),
+            inverseJoinColumns = @JoinColumn(name = "session_id")
+    )
     private Set<Session> sessions = new HashSet<>();
+
 }

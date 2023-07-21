@@ -18,7 +18,7 @@ import java.util.List;
 public class Admin_Type {
     @Id
     @GeneratedValue
-    private Integer Id;
+    private Integer id;
     private String admin_type;
 
     @OneToMany(mappedBy = "adminType", cascade = CascadeType.ALL)

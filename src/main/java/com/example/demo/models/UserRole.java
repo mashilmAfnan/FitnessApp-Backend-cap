@@ -16,16 +16,23 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "Userr")
-public class Userr {
+public class UserRole {
     @Id
-    private Integer user_info_id;
+    @Column(name = "user_info_id")
+    private Integer id;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
-    private UserInfo userInfo;
+    private RoleInfo userInfo;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_subscription",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "subscription_id")
+    )
+    private List<Subscription> subscriptions;
 
     @OneToMany(mappedBy = "user")
-    private List<Subscription> subscriptions= new ArrayList<>();
+    private List<Subscriber> subscribers = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "users")
-    private List<Subscriber> subscribers= new ArrayList<>();
 }

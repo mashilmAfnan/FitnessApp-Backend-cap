@@ -19,11 +19,12 @@ import java.util.List;
 public class Feedback {
     @Id
     @GeneratedValue
-    private  Integer Id;
+    private  Integer id;
     private String content;
     private LocalDate date;
 
-    @ManyToMany(mappedBy = "feedbacks")
-    private List<Subscriber> subscribers= new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "subscriber_id")
+    private Subscriber subscriber;
 
 }

@@ -18,12 +18,14 @@ import java.util.List;
 public class Package {
     @Id
     @GeneratedValue
-    private Integer Id;
-    private String Type;
+    private Integer id;
+    private String type;
     private Double price;
 
-    @OneToMany(mappedBy = "package", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "packageEntity")
     private List<Subscription> subscriptions = new ArrayList<>();
-@OneToMany(mappedBy = "PlaceOfService", cascade = CascadeType.ALL, orphanRemoval = true)
-private List<PlaceOfService> Place = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "place_of_service_id")
+    private PlaceOfService placeOfService;
 }

@@ -35,6 +35,7 @@ public class JwtService {
     ){
         return Jwts
                 .builder()
+                .setHeaderParam("typ", "JWT")
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
@@ -42,6 +43,7 @@ public class JwtService {
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
+
     public boolean isTokenValid(String token, UserDetails userDetails){
         final String username =extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));

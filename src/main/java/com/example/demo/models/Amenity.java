@@ -21,7 +21,7 @@ public class Amenity {
     @Id
     @GeneratedValue
 
-    private Integer Id;
+    private Integer id;
     private String type;
     private Boolean availability;
     @ManyToMany

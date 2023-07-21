@@ -22,40 +22,36 @@ public class Subscriber {
     @Id
     @GeneratedValue
     private Integer subscriber_Id;
-    private Integer subscription_Id;
+  //  private Integer subscription_Id;
     private Integer pt_id;
-    @ManyToMany
-    @JoinTable(name="subscriber_feedback",
-            joinColumns = @JoinColumn(name="subscriber_id"),
-            inverseJoinColumns= @JoinColumn(name="feedback_id")
-    )
-    private Set<Feedback> feedback = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "subscriber_session_booking",
-            joinColumns = @JoinColumn(name = "subscriber_id"),
-            inverseJoinColumns = @JoinColumn(name = "session_booking_id")
-    )
-    private List<SessionBooking> sessionBookings= new ArrayList<>();
 
-    @OneToOne(mappedBy = "subscriber")
+
+
+
+    @OneToOne
+    @JoinColumn(name = "subscription_id", insertable = false, updatable = false)
     private Subscription subscription;
 
-    @ManyToMany
-    @JoinTable(
-            name = "subscriber_user",
-            joinColumns = @JoinColumn(name = "subscriber_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private List<Userr> users= new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(
-            name = "subscriber_feedback",
-            joinColumns = @JoinColumn(name = "subscriber_id"),
-            inverseJoinColumns = @JoinColumn(name = "feedback_id")
-    )
-    private List<Feedback> feedbacks= new ArrayList<>();
+
+    @ManyToMany(mappedBy = "subscribers")
+    private Set<SessionBooking> sessionBookings = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserRole user;
+
+    @OneToMany(mappedBy = "subscriber")
+    private List<Feedback> feedbacks = new ArrayList<>();
+//    @ManyToMany
+//    @JoinTable(
+//            name = "subscriber_feedback",
+//            joinColumns = @JoinColumn(name = "subscriber_id"),
+//            inverseJoinColumns = @JoinColumn(name = "feedback_id")
+//    )
+//    private List<Feedback> feedbacks= new ArrayList<>();
+
+
 
 }

@@ -18,9 +18,13 @@ import java.util.List;
 public class Discount {
     @Id
     @GeneratedValue
-    private Integer Id;
+    private Integer id;
     private String couponCode;
     private Integer Percentage;
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "place_of_service_id")
+    private PlaceOfService placeOfService;
 
     @OneToMany(mappedBy = "discount")
     private List<Subscription> subscriptions= new ArrayList<>();

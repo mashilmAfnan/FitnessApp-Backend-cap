@@ -22,7 +22,7 @@ import java.util.Set;
 public class PlaceOfService {
    @Id
    @GeneratedValue
-    private Integer Id;
+    private Integer id;
     private String name;
     private String type;
     private String location;
@@ -31,17 +31,14 @@ public class PlaceOfService {
     @ManyToMany
     @JoinTable(name="place_amenity",
             joinColumns = @JoinColumn(name="place_id"),
-            inverseJoinColumns= @JoinColumn(name="amenity_id")
-    )
-
+            inverseJoinColumns= @JoinColumn(name="amenity_id")    )
     private Set<Amenity> amenity = new HashSet<>();
 
 
     @ManyToMany
     @JoinTable(name="place_room",
     joinColumns = @JoinColumn(name="place_id"),
-    inverseJoinColumns= @JoinColumn(name="room_no")
-    )
+    inverseJoinColumns= @JoinColumn(name="room_no")    )
     private Set<Room> room = new HashSet<>();
 
  @ManyToMany(mappedBy = "placesOfService")
@@ -52,5 +49,11 @@ public class PlaceOfService {
 
  @ManyToMany(mappedBy = "placesOfService")
  private List<Session> sessions= new ArrayList<>();
+
+ @OneToMany(mappedBy = "placeOfService")
+ private List<Package> packages = new ArrayList<>();
+
+ @OneToMany(mappedBy = "placeOfService")
+ private List<Discount> discounts = new ArrayList<>();
 
 }
