@@ -13,7 +13,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-;import static org.springframework.http.HttpMethod.GET;
+;import static com.example.demo.security.Permission.USER_UPDATE_INFO;
+import static org.springframework.http.HttpMethod.*;
 
 @Configuration
 @EnableWebSecurity
@@ -31,14 +32,30 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
         .authorizeRequests()
             .requestMatchers(requestMatcher("/api/v1/auth/**"))
             .permitAll()
-            .antMatchers("/api/v1/amenity/**").hasAnyRole("SUPER_ADMIN", "ADMIN")
-            .antMatchers("/api/v1/package/**").hasAnyRole("SUPER_ADMIN", "ADMIN")
-            .antMatchers("/api/v1/room/**").hasAnyRole("SUPER_ADMIN", "ADMIN")
-            .antMatchers("/api/v1/discount/**").hasAnyRole("SUPER_ADMIN", "ADMIN")
+            .antMatchers("/api/v1/auth/**").permitAll()
+            .antMatchers("/api/v1/user/**").permitAll()
+            .antMatchers(GET, "/api/v1/place/**").permitAll()
+            .antMatchers("/api/v1/admin-type/**").hasAnyRole("SUPERADMIN")
+            .antMatchers(POST, "/api/v1/place/**").hasAnyRole("SUPERADMIN")
+            .antMatchers(DELETE, "/api/v1/place/**").hasAnyRole("SUPERADMIN")
+            .antMatchers("/api/v1/discount/**").hasAnyRole("SUPERADMIN", "ADMIN")
+            .antMatchers(GET, "/api/v1/feedback/**").hasAnyRole("SUPERADMIN", "ADMIN")
+            .antMatchers(DELETE, "/api/v1/feedback/**").hasAnyRole("SUPERADMIN", "ADMIN")
+            .antMatchers("/api/v1/package/**").hasAnyRole("SUPERADMIN", "ADMIN")
+            .antMatchers("/api/v1/room/**").hasAnyRole("SUPERADMIN", "ADMIN")
+            .antMatchers(PUT, "/api/v1/place/**").hasAnyRole("SUPERADMIN", "ADMIN")
+            .antMatchers("/api/v1/session/**").hasAnyRole("SUPERADMIN", "ADMIN")
+            .antMatchers("/api/v1/room/**").hasAnyRole("SUPERADMIN", "ADMIN")
+            .antMatchers("/api/v1/amenity/**").hasAnyRole("SUPERADMIN", "GYMADMIN") //ONLY GYM ADMIN OF ADMINS
+            .antMatchers("/api/v1/subscriber/**").hasAnyRole("SUPERADMIN", "ADMIN") //might need more restrictions
+            .antMatchers("/api/v1/discount/**").hasAnyRole("SUPERADMIN", "ADMIN")
+            //USER ONLY
             .antMatchers(GET, "/api/v1/amenity/**").hasAnyRole("USER")
+            .antMatchers(POST,  "/api/v1/feedback/**").hasAnyRole("USER") //should i add one for GET?
             .antMatchers(GET,"/api/v1/package/**").hasAnyRole("USER")
             .antMatchers(GET,"/api/v1/room/**").hasAnyRole("USER")
-            .antMatchers(GET,"/api/v1/discount/**").hasAnyRole("USER")
+            .antMatchers(GET,"/api/v1/session/**").hasAnyRole("USER")
+            .antMatchers(PUT, "/api/v1/user/**" ).hasAuthority(USER_UPDATE_INFO.name())
 
             .anyRequest()
             .authenticated()
@@ -54,7 +71,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
 
     return http.build();
 }
-
+/**/
 
 
     private RequestMatcher requestMatcher(String pathPattern) {
@@ -64,3 +81,10 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
 
 
 }
+//1. permit all
+//2. sadmin only
+//3. sadmin and admin(all)
+//4. admin (all) only
+//5. specific admin
+//6. admib=n with user
+//7. user only

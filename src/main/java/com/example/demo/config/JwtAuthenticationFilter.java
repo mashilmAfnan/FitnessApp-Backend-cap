@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import com.example.demo.constants;
 import com.example.demo.services.JwtService;
 import com.sun.istack.NotNull;
 import lombok.NonNull;
@@ -31,13 +32,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull    FilterChain filterChain)
             throws ServletException, IOException {
-        final String authHeader = request.getHeader("Authorization");
-
+        final String authHeader = request.getHeader(constants.AUTH_HEADER);
         final String jwt;
-       // System.out.println("******************************************* " + authHeader);
-        //System.out.println(jwt);
         final String userEmail;
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith(constants.START_WITH_BEARER)) {
             filterChain.doFilter(request, response);
             return;
         }

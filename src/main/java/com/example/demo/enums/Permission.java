@@ -1,4 +1,4 @@
-package com.example.demo.security;
+package com.example.demo.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -6,12 +6,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Permission {
     //sadmin
-    Super_ADMIN_ADD_ADMIN("super_admin:add_admin"),
+   // Super_ADMIN_ADD_ADMIN("super_admin:add_admin"),
     Super_ADMIN_ADD_ADMIN_TYPE("super_admin:add_admin_type"),
+    SUPER_ADMIN_VIEW_AMENTIES("super_admin:view_amenities"),
     Super_ADMIN_DELETE_ADMIN("super_admin:delete_admin"),
     Super_ADMIN_UPDATE_ADMIN("super_admin:update_admin"),
     SUPER_ADMIN_VIEW_ROOMS("super_admin:view_rooms"),
-    SUPER_ADMIN_VIEW_AMENTIES("super_admin:view_amenities"),
+
     SUPER_ADMIN_VIEW_PACKAGES("super_admin:view_packages"),
     SUPER_ADMIN_VIEW_DISCOUNTS("super_admin:view_discounts"),
     SUPER_ADMIN_VIEW_SUBSCRIBERS("super_admin:view_subscribers"),
@@ -21,7 +22,7 @@ public enum Permission {
     SUPER_ADMIN_DELETE_SESSION("super_admin:delete_session"),
     SUPER_ADMIN_DELETE_PACKAGE("super_admin:delete_package"),
     SUPER_ADMIN_DELETE_DISCOUNT("super_admin:delete_package"),
-   // SUPER_ADMIN_REGISTER("super_admin:register"),
+    // SUPER_ADMIN_REGISTER("super_admin:register"),
     //admin
     ADMIN_ADD_SESSION("admin:add_session"),
     ADMIN_ADD_PACKAGE("admin:add_package"),
@@ -29,7 +30,7 @@ public enum Permission {
     ADMIN_DELETE_SESSION("admin:delete_session"),
     ADMIN_DELETE_PACKAGE("admin:delete_package"),
     ADMIN_DELETE_DISCOUNT("admin:delete_package"),
-   // ADMIN_REGISTER("admin:register"),
+    // ADMIN_REGISTER("admin:register"),
     //user
     USER_FILL_INFO("user:fill_info"),
     USER_UPDATE_INFO("user:update_info"),
@@ -41,7 +42,7 @@ public enum Permission {
     USER_CANCEL_SESSION("user_cancel_session"),
     REGISTER("any:register")
     ;
-//log out and delete account
+    //log out and delete account
     @Getter
     private final String permission;
 }

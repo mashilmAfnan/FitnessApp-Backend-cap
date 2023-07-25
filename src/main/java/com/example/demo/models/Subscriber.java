@@ -21,7 +21,7 @@ public class Subscriber {
     //subsc id, subription id , pt id
     @Id
     @GeneratedValue
-    private Integer subscriber_Id;
+    private Integer subscriberId;
   //  private Integer subscription_Id;
     private Integer pt_id;
 
@@ -44,13 +44,7 @@ public class Subscriber {
 
     @OneToMany(mappedBy = "subscriber")
     private List<Feedback> feedbacks = new ArrayList<>();
-//    @ManyToMany
-//    @JoinTable(
-//            name = "subscriber_feedback",
-//            joinColumns = @JoinColumn(name = "subscriber_id"),
-//            inverseJoinColumns = @JoinColumn(name = "feedback_id")
-//    )
-//    private List<Feedback> feedbacks= new ArrayList<>();
+
 
 
 

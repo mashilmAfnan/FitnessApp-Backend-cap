@@ -4,6 +4,7 @@ import com.example.demo.exceptions.DiscountNotFoundException;
 import com.example.demo.exceptions.PackageNotFoundException;
 import com.example.demo.models.Discount;
 import com.example.demo.models.Package;
+import com.example.demo.models.Registered_In_Gym;
 import com.example.demo.repositories.PackageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,26 +28,33 @@ public class PackageService {
                             .stream()
                             .collect(Collectors.toList());
     }
+    public List<Package> getAllPackages() {
+        return packageRepo.findAll();
+    }
 
     public void RegisterNewPackage(Package pack) {
-        Package newPackage = new Package();
-        packageRepo.save(newPackage);
+
+        packageRepo.save(pack);
     }
     @Transactional
 public void UpdatePackage(Integer id, String type, Double price) throws PackageNotFoundException {
 
+        System.out.println("\n\n\n Hello from update package service");
         Optional<Package> optionalPackage = packageRepo.findById(id);
         if (optionalPackage.isPresent()) {
+            System.out.println("\n\n\nHello I am present");
             Package pack = optionalPackage.get();
+//            if (price!= null &&
+//                    price>0){
+                System.out.println("\n\n\n Hello from update package price");
+                pack.setPrice(price);
+//            }
             if (type!= null &&
                     type.length()>0 &&
                     !Objects.equals(type, pack.getType())){
                 pack.setType(type);
             }
-            if (price!= null &&
-                    price>0){
-                pack.setPrice(price);
-            }
+
             packageRepo.save(pack);
         } else {
 

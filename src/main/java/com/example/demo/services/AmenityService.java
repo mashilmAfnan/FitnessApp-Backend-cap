@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.exceptions.AmenityNotFoundException;
 import com.example.demo.models.Amenity;
+import com.example.demo.models.Registered_In_Gym;
 import com.example.demo.repositories.AmenityRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,9 @@ import javax.transaction.Transactional;
 import java.beans.Transient;
 import java.util.List;
 import java.util.Optional;
+
+import static java.lang.Character.getType;
+
 @Service
 public class AmenityService {
     private AmenityRepo amenityRepo;
@@ -21,17 +25,25 @@ public class AmenityService {
     public List<Amenity> findAmenityByName(String name) {
         return amenityRepo.findAmenityByAmenityType(name);
     }
+    public List<Amenity> getAllAmenities() {
+        return amenityRepo.findAll();
+    }
 
     public void RegisterNewAmenity(Amenity amenity) {
-        Amenity newAmenity = new Amenity();
-        amenityRepo.save(newAmenity);
+
+        System.out.println("In service\n" + amenity + "\n");
+
+        amenityRepo.save(amenity);
     }
   @Transactional
     public void updateAmenityAvailability(Integer id, Boolean availability) throws AmenityNotFoundException {
         Optional<Amenity> optionalAmenity = amenityRepo.findById(id);
-
+      System.out.println("\n\n\nHello from update service");
         if (optionalAmenity.isPresent()) {
             Amenity amenity = optionalAmenity.get();
+            System.out.println("\n\n\n amenity: " +amenity);
+            System.out.println("\n\n\n availability: " +availability);
+            System.out.println((getType(availability)));
             amenity.setAvailability(availability);
             amenityRepo.save(amenity);
         } else {
@@ -39,7 +51,17 @@ public class AmenityService {
             throw new AmenityNotFoundException(id);
         }
     }
-
+    public static String getType(Object obj) {
+        if (obj instanceof Integer) {
+            return "\n\n\n int";
+        } else if (obj instanceof Double) {
+            return "\n\n\ndouble";
+        } else if (obj instanceof Boolean) {
+            return "\n\n\nboolean";
+        } else {
+            return "\n\n\nunknown";
+        }
+    }
     public void deleteAmenityById(Integer id) {
 
         boolean exists = amenityRepo.existsById(id);

@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.exceptions.RoomNotFoundException;
+import com.example.demo.models.Registered_In_Gym;
 import com.example.demo.models.Room;
 import com.example.demo.repositories.RoomRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,13 @@ public class RoomService {
         return roomRepo.findByRoomNo(roomNo) .stream()
                 .collect(Collectors.toList());
     }
+    public List<Room> getAllRooms() {
+        return roomRepo.findAll();
+    }
 
     public void RegisterNewRoom(Room room) {
-    Room newRoom = new Room();
-    roomRepo.save(newRoom);
+
+    roomRepo.save(room);
     }
 @Transactional
     public void updateRoomAvailability(Integer roomNo, Boolean availability) throws RoomNotFoundException {

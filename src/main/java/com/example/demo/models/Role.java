@@ -32,6 +32,7 @@ public enum Role {
                     SUPER_ADMIN_DELETE_SESSION,
                     SUPER_ADMIN_DELETE_PACKAGE,
                     SUPER_ADMIN_DELETE_DISCOUNT
+
             )
 
     )
@@ -57,6 +58,7 @@ public enum Role {
                     USER_UPDATE_INFO,
                     USER_VIEW_PACKAGES,
                     USER_SUBSCRIBE,
+                    USER_VIEW_SUBSCRIPTION,
                     USER_APPLY_DISCOUNT,
                     USER_BOOK_SESSION,
                     USER_CANCEL_SESSION
@@ -64,6 +66,9 @@ public enum Role {
     )
 
     ;
+
+
+
     @Getter
         private  final Set<Permission> permissions;
         public List<SimpleGrantedAuthority> getAuthorities(){

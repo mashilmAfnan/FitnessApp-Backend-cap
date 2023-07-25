@@ -4,6 +4,7 @@ import com.example.demo.exceptions.AmenityNotFoundException;
 import com.example.demo.exceptions.DiscountNotFoundException;
 import com.example.demo.models.Amenity;
 import com.example.demo.models.Discount;
+import com.example.demo.models.Registered_In_Gym;
 import com.example.demo.repositories.AmenityRepo;
 import com.example.demo.repositories.DiscountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,12 @@ public class DiscountService {
         this.discountRepo = discountRepo;
     }
 
-    public void RegisterNewDiscount(Discount amenity) {
-        Discount newDiscount = new Discount();
-        discountRepo.save(newDiscount);
+    public void RegisterNewDiscount(Discount discount) {
+
+        discountRepo.save(discount);
+    }
+    public List<Discount> getAllDiscounts() {
+        return discountRepo.findAll();
     }
 
     public List<Discount> findDiscountById(Integer id) {
@@ -40,7 +44,7 @@ public class DiscountService {
    @Transactional
 public void UpdateDiscountDetails(Integer id, String couponCode, Integer percentage) throws DiscountNotFoundException {
        Optional <Discount> optionalDiscount = discountRepo.findById(id);
-          //.orElseThrow(()-> new IllegalStateException("BOOK WITH THIS ID DOES NOT EXIST"));
+          //.orElseThrow(()-> new IllegalStateException("DISCOUNT WITH THIS ID DOES NOT EXIST"));
         if (optionalDiscount.isPresent()) {
             Discount discount = optionalDiscount.get();
             if (couponCode!= null &&

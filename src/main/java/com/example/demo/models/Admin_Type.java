@@ -19,7 +19,7 @@ public class Admin_Type {
     @Id
     @GeneratedValue
     private Integer id;
-    private String admin_type;
+    private TypeOfAdmin admin_type;
 
     @OneToMany(mappedBy = "adminType", cascade = CascadeType.ALL)
     private List<Admin_Role> adminRoles= new ArrayList<>();

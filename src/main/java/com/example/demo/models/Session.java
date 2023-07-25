@@ -22,9 +22,10 @@ public class Session {
     @GeneratedValue
     @Column(name="session_id")
     private Integer id;
+    private String name;
     private LocalDate session_date;
-    private LocalTime time;
-
+    private LocalTime session_time;
+//1.	Add findAll() to services
     @ManyToMany
     @JoinTable(name="session_room",
             joinColumns = @JoinColumn(name="session_id"),

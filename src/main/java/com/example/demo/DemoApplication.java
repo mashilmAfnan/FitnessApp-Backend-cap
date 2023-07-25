@@ -10,5 +10,6 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 	//we can add a bean anno here and an example to test the application
+	//should the password bcrypt bean be defined here?
 
 }

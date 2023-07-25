@@ -4,6 +4,7 @@ import com.example.demo.exceptions.AmenityNotFoundException;
 import com.example.demo.exceptions.DiscountNotFoundException;
 import com.example.demo.models.Amenity;
 import com.example.demo.models.Discount;
+import com.example.demo.models.Registered_In_Gym;
 import com.example.demo.repositories.AmenityRepo;
 import com.example.demo.services.AmenityService;
 import com.example.demo.services.DiscountService;
@@ -36,7 +37,11 @@ public class DiscountController {
         List<Discount> discounts = discountService.findDiscountById(id);
         return ResponseEntity.ok(discounts);
     }
-
+    @GetMapping("/find-all")
+    public ResponseEntity<List<Discount>> getAllDiscounts() {
+        List<Discount> discounts = discountService.getAllDiscounts();
+        return ResponseEntity.ok(discounts);
+    }
 
 
     @PutMapping(path ="/update/{id}")
@@ -50,9 +55,11 @@ public class DiscountController {
     }
 
     @DeleteMapping("/del/{id}")
-    public void DeleteDiscount(@PathVariable("id") Integer id) throws DiscountNotFoundException {
+    public void DeleteDiscountById(@PathVariable("id") Integer id) throws DiscountNotFoundException {
         discountService.DeleteDiscountById(id);
     }
+    //add a service where the user applies the discount and it gets added to the subscription total price
+    //also each admin is responsible for adding discounts for his/her place of service, so there should be a restriction for admins to only add ones they are authorized to access
 }
 
 

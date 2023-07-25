@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface UserInfoRepo extends JpaRepository<RoleInfo, Integer> {
 //rename role info repo
-    @Query()
+//    @Query()
     Optional<RoleInfo> findByEmail(String email);
 
     Boolean existsByEmail(String email);
