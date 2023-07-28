@@ -32,6 +32,8 @@ public class SubscriberController {
         return ResponseEntity.ok(subscribers);
     }
     //add find all and give the user access
+
+    //only for testing purposes. subscriber has to be added only if the user subscribers to a package
     @PostMapping("/add-subscriber")
     public void RegisterNewSubscriber(@RequestBody Subscriber subscriber)
     {

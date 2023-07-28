@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 @Repository
 public interface DiscountRepo extends JpaRepository<Discount, Integer> {
-   Optional<Discount> findById(Integer Id);
-
+//   Optional<Discount> findById(Integer Id);
+  Discount findDiscountByCouponCode(String couponCode);
 }

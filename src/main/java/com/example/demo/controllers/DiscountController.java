@@ -33,10 +33,10 @@ public class DiscountController {
         discountService.RegisterNewDiscount(discount);
     }
     @GetMapping("/find-by-id/{id}")
-    public ResponseEntity<List<Discount>> FindDiscountById(@PathVariable Integer id) {
-        List<Discount> discounts = discountService.findDiscountById(id);
+    public ResponseEntity<Discount> FindDiscountById(@PathVariable String couponCode) {
+        Discount discounts = discountService.findDiscountByCouponCode(couponCode);
         return ResponseEntity.ok(discounts);
-    }
+    } //check to add the List<Discount>
     @GetMapping("/find-all")
     public ResponseEntity<List<Discount>> getAllDiscounts() {
         List<Discount> discounts = discountService.getAllDiscounts();

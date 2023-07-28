@@ -25,6 +25,7 @@ public class Session {
     private String name;
     private LocalDate session_date;
     private LocalTime session_time;
+    //add price of session
 //1.	Add findAll() to services
     @ManyToMany
     @JoinTable(name="session_room",
@@ -34,7 +35,7 @@ public class Session {
 
 
     @ManyToMany
-    @JoinTable( name="session-booking",
+    @JoinTable( name="sessionbookingid-sessionid",
                joinColumns = @JoinColumn(name="session_id"),
             inverseJoinColumns= @JoinColumn(name="session_booking_id")
     )

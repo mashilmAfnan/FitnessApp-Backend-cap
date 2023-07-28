@@ -1,10 +1,14 @@
 package com.example.demo.config;
 
+//import com.example.demo.token.TokenBlacklist;
+//import com.example.demo.token.TokenValidationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -20,8 +24,11 @@ import static org.springframework.http.HttpMethod.*;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfiguration {
+
  private final JwtAuthenticationFilter jwtAuthFilter;
  private final AuthenticationProvider authenticationProvider;
+//    private final TokenBlacklist tokenBlacklist;
+//    private final   TokenValidationFilter tokenValidationFilter;
 
 //.requestMatchers("/api/v1/auth/**").hasAnyRole(SUPER_ADMIN.name())
  @Bean
@@ -47,38 +54,43 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
             .antMatchers("/api/v1/session/**").hasAnyRole("SUPERADMIN", "ADMIN")
             .antMatchers("/api/v1/room/**").hasAnyRole("SUPERADMIN", "ADMIN")
             .antMatchers("/api/v1/amenity/**").hasAnyRole("SUPERADMIN", "GYMADMIN") //ONLY GYM ADMIN OF ADMINS
-            .antMatchers("/api/v1/subscriber/**").hasAnyRole("SUPERADMIN", "ADMIN") //might need more restrictions
+            .antMatchers("/api/v1/subscriber/**").hasAnyRole("SUPERADMIN", "ADMIN") //might need more restrictions and user should add this
             .antMatchers("/api/v1/discount/**").hasAnyRole("SUPERADMIN", "ADMIN")
-            //USER ONLY
+            //USER AND SUBSCRIBER ONLY
             .antMatchers(GET, "/api/v1/amenity/**").hasAnyRole("USER")
-            .antMatchers(POST,  "/api/v1/feedback/**").hasAnyRole("USER") //should i add one for GET?
+            .antMatchers(POST,  "/api/v1/feedback/**").hasAnyRole("SUBSCRIBER") //ONLY  a subscriber can write feedbacks //should i add one for GET?
             .antMatchers(GET,"/api/v1/package/**").hasAnyRole("USER")
             .antMatchers(GET,"/api/v1/room/**").hasAnyRole("USER")
             .antMatchers(GET,"/api/v1/session/**").hasAnyRole("USER")
-            .antMatchers(PUT, "/api/v1/user/**" ).hasAuthority(USER_UPDATE_INFO.name())
+            .antMatchers(POST,"/api/v1/sub-sessionbooking/**").hasAnyRole("USER") //add that user should add subscriber!
+            .antMatchers(POST, "/api/v1/subscriber/**").hasAnyRole("USER")
 
             .anyRequest()
             .authenticated()
             .and()
-        .sessionManagement().
-        sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .sessionManagement().
+            sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
-        .authenticationProvider(authenticationProvider)
-        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+            .authenticationProvider(authenticationProvider)
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+
+
 
     http.cors().disable();
     http.csrf().disable();
 
     return http.build();
 }
-/**/
 
 
     private RequestMatcher requestMatcher(String pathPattern) {
         return new AntPathRequestMatcher(pathPattern);
     }
 
-
+//    @Bean
+//    public TokenValidationFilter tokenValidationFilter(TokenBlacklist tokenBlacklist, AuthenticationManager authenticationManager) {
+//        return new TokenValidationFilter(new AntPathRequestMatcher("/**"), tokenBlacklist, authenticationManager);
+//    }
 
 }
 //1. permit all
@@ -88,3 +100,23 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
 //5. specific admin
 //6. admib=n with user
 //7. user only
+
+ //  .addFilter(new TokenValidationFilter(new AntPathRequestMatcher("/**"), tokenBlacklist, authenticationManager)
+//            .addFilterBefore(tokenValidationFilter, UsernamePasswordAuthenticationFilter.class)
+//            .logout()
+//            .logoutUrl("/api/v1/logout") // Customize the logout URL if needed
+//            .invalidateHttpSession(true) // Invalidate the session on logout
+////            .deleteCookies("JSESSIONID") // Delete the session cookie on logout
+////            .logoutSuccessUrl("/logout-success") // Customize the logout success URL
+//            .permitAll();
+//    or add this
+//             .addLogoutHandler(logoutHandler)
+//             .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
+
+
+//from bouali
+//  .logout()
+//          .logoutUrl("/api/v1/auth/logout")
+//          .addLogoutHandler(logoutHandler)
+//          .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
+//          ;

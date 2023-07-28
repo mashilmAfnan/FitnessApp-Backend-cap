@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface SubscriptionRepo extends JpaRepository<Subscription, Integer> {
-    Optional<Subscription> findSubscriptionById(Integer Id);
+//    Optional<Subscription> findSubscriptionById(Integer Id);
+
 }

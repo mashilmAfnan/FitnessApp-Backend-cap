@@ -19,6 +19,7 @@ public class Subscription {
     @Id
     @GeneratedValue
     private Integer id;
+    private Double total_price;
     private LocalDate start_date;
     private LocalDate end_date;
 

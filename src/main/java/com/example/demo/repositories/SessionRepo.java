@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface SessionRepo extends JpaRepository<Session, Integer> {
-    Optional<Session> findById(Integer Id);
+//    Session findById(Integer Id);
 }

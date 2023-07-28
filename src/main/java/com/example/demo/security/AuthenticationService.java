@@ -6,6 +6,7 @@ import com.example.demo.models.RoleInfo;
 import com.example.demo.models.RoleInfo;
 import com.example.demo.repositories.UserInfoRepo;
 import com.example.demo.services.JwtService;
+//import com.example.demo.token.TokenBlacklist;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jdi.request.DuplicateRequestException;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,15 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private  final AuthenticationManager authenticationManager;
 
+//    private final TokenBlacklist tokenBlacklist;
+//
+//
+//
+//    public void logout(String token) {
+//        // Add the token to the blacklist
+//        tokenBlacklist.addTokenToBlacklist(token);
+//    }
+
     public AuthenticationResponse register(RegisterRequest request) {
         //we dont want any email duplicates
         Boolean exists = repository.existsByEmail(request.getEmail());
@@ -40,6 +50,10 @@ public class AuthenticationService {
                     .fname(request.getFname())
                     .lname(request.getLname())
                     .email(request.getEmail())
+                    .bloodType(request.getBloodType())
+                    .phoneNo(request.getPhoneNo())
+                    .emergencyPhoneNo(request.getEmergencyPhoneNo())
+                    .city(request.getCity())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .role(request.getRole())
                     .build();
@@ -92,7 +106,6 @@ public class AuthenticationService {
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
 //              .orElseThrow(() -> new UserNotFoundException(constants.USER_NOT_FOUND_EXCEPTION));
-//
 //        if (!user.getIsVerified()){
 //
 //            throw new UnverifiedUserException(constants.UNVERIFIED_USER_EXCEPTION);

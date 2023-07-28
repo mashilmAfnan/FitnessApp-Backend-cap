@@ -15,6 +15,8 @@ import java.beans.Transient;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 public class PlaceOfServiceService {
 
@@ -26,7 +28,7 @@ public class PlaceOfServiceService {
     }
 //WHAT SHOULD THE LIST HAVE AS RETURN VALUE? IT WAS EMPTY WHEN I TESTED IT
     public List<PlaceOfService> findPlaceOfServiceByName(String name) {
-        return placeOfServiceRepo.findByName(name).stream().toList();
+        return placeOfServiceRepo.findByName(name).stream().collect(Collectors.toList());
     }
     public List<PlaceOfService> getAllPlaces() {
         return placeOfServiceRepo.findAll();

@@ -17,15 +17,17 @@ public class UserInfoController {
     @PutMapping("/update-user-info/{email}")
     public ResponseEntity<String> UpdateInfo( @PathVariable("email") String email,
 //                            @RequestParam(required = false, defaultValue = "*******")
-                            String fname
-//                            @RequestParam(required = false) String lname,
-//                            @RequestParam(required = false) String password,
-//                            @RequestParam(required = false) String bloodType,
-//                            @RequestParam(required = false) String phoneNo,
-//                            @RequestParam(required = false) String city,
-//                            @RequestParam(required = false) String emergencyPhoneNo
+                            @RequestParam(required = false)  String fname,
+                            @RequestParam(required = false) String lname,
+                            @RequestParam(required = false) String password,
+                            @RequestParam(required = false) String bloodType,
+                            @RequestParam(required = false) String phoneNo,
+                            @RequestParam(required = false) String city,
+                            @RequestParam(required = false) String emergencyPhoneNo
                             ) {
-        userInfoService.UpdateInfo(email, fname);
+        System.out.println("\n\nHello from user controller1!!!!!\n\n");
+        userInfoService.UpdateRoleInfo(email, fname, lname, password, bloodType, phoneNo,city,emergencyPhoneNo);
+        System.out.println("\n\nHello from user controller2!!!!!\n\n");
                 //, lname, password, bloodType, phoneNo,city,emergencyPhoneNo );
         return ResponseEntity.ok("Information updated successfully.");
 

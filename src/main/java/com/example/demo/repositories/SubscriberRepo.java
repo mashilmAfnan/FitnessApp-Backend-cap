@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 @Repository
 public interface SubscriberRepo extends JpaRepository<Subscriber, Integer> {
-    Optional<Subscriber> findSubscriberBySubscriberId(Integer Id);
+//    Optional<Subscriber> findSubscriberBySubscriberId(Integer Id);
 
 
 }

@@ -13,5 +13,5 @@ public interface UserInfoRepo extends JpaRepository<RoleInfo, Integer> {
 //    @Query()
     Optional<RoleInfo> findByEmail(String email);
 
-    Boolean existsByEmail(String email);
+   Boolean existsByEmail(String email);
 }

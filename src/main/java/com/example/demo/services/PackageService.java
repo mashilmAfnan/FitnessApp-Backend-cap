@@ -23,22 +23,18 @@ public class PackageService {
         this.packageRepo = packageRepo;
     }
 
-    public List<Package> FindPackageById(Integer id) {
-        return packageRepo.findPackageById(id)
-                            .stream()
-                            .collect(Collectors.toList());
+    public Package FindPackageById(Integer id) {
+        return packageRepo.findById(id).orElse(null);
     }
     public List<Package> getAllPackages() {
         return packageRepo.findAll();
     }
 
     public void RegisterNewPackage(Package pack) {
-
         packageRepo.save(pack);
     }
     @Transactional
 public void UpdatePackage(Integer id, String type, Double price) throws PackageNotFoundException {
-
         System.out.println("\n\n\n Hello from update package service");
         Optional<Package> optionalPackage = packageRepo.findById(id);
         if (optionalPackage.isPresent()) {
@@ -54,15 +50,12 @@ public void UpdatePackage(Integer id, String type, Double price) throws PackageN
                     !Objects.equals(type, pack.getType())){
                 pack.setType(type);
             }
-
             packageRepo.save(pack);
         } else {
-
             throw new PackageNotFoundException(id);
         }
 }
     public void DeletePackageById(Integer id) {
-
         boolean exists = packageRepo.existsById(id);
         if (!exists) {
             throw new IllegalStateException("book with id " + id + " does not even exist ");
@@ -71,4 +64,7 @@ public void UpdatePackage(Integer id, String type, Double price) throws PackageN
     }
 
 
+    public Package getPackageById(Integer packageId) {
+        return packageRepo.findById(packageId).orElse(null);
+    }
 }

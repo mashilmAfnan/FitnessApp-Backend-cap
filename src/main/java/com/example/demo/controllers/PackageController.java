@@ -21,8 +21,8 @@ public class PackageController {
         this.packageService = packageService;
     }
     @GetMapping("/find-by-id/{id}")
-    public ResponseEntity<List<Package>> FindDiscountById(@PathVariable Integer id) {
-        List<Package> packages = packageService.FindPackageById(id);
+    public ResponseEntity<Package> FindDiscountById(@PathVariable Integer id) {
+       Package packages = packageService.FindPackageById(id);
         return ResponseEntity.ok(packages);
     }
     @GetMapping("/find-all")
@@ -55,6 +55,6 @@ public class PackageController {
 }
 
 
-//ADD A SERVICE TO ALLOW THE USER TO PURCHASE A PACKAGE AND APPLY DISCOUNT IF POSSIBLE
+
 
 

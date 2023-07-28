@@ -1,29 +1,62 @@
-//package com.example.demo.services;
-//
-//import com.example.demo.exceptions.AmenityNotFoundException;
-//import com.example.demo.models.Amenity;
-//import com.example.demo.models.SessionBooking;
-//import com.example.demo.repositories.AmenityRepo;
-//import com.example.demo.repositories.SessionBookingRepo;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//
-//import javax.transaction.Transactional;
-//import java.beans.Transient;
-//import java.util.List;
-//import java.util.Optional;
-//
-//import static java.lang.Character.getType;
-//
-//@Service
-//public class SessionBookingService {
-//    private SessionBookingRepo sessionBookingRepo;
-//    @Autowired
-//
-//    public List<Amenity> findAmenityByName(String name) {
+package com.example.demo.services;
+
+import com.example.demo.DTO.SessionBookingDTO;
+import com.example.demo.exceptions.AmenityNotFoundException;
+import com.example.demo.exceptions.SessionCannotBeBookedException;
+import com.example.demo.models.Amenity;
+import com.example.demo.models.Session;
+import com.example.demo.models.SessionBooking;
+import com.example.demo.models.Subscriber;
+import com.example.demo.repositories.AmenityRepo;
+import com.example.demo.repositories.SessionBookingRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.beans.Transient;
+import java.util.List;
+import java.util.Optional;
+
+import static java.lang.Character.getType;
+
+@Service
+public class SessionBookingService {
+    private final SessionBookingRepo sessionBookingRepo;
+    private final SubscriberService subscriberService;
+    private final SessionService sessionService;
+    @Autowired
+    public SessionBookingService(SessionBookingRepo sessionBookingRepo, SubscriberService subscriberService, SessionService sessionService) {
+        this.sessionBookingRepo = sessionBookingRepo;
+        this.subscriberService = subscriberService;
+        this.sessionService = sessionService;
+    }
+
+
+
+
+
+    public void subscriberBookSession(SessionBookingDTO sessionBookingDTO) throws SessionCannotBeBookedException {
+  Integer sessionId = sessionBookingDTO.getSessionId();
+  Integer subscriberId = sessionBookingDTO.getSubscriberId();
+
+//id not the whole thing!
+        if (subscriberId != null && sessionId != null) {
+           Subscriber subscriber = subscriberService.getSubscriberById(subscriberId);
+           Session session = sessionService.getSessionById(sessionId);
+            SessionBooking sessionBooking = new SessionBooking();
+            sessionBooking.setSubscriber(subscriber);
+            sessionBooking.setSession(session);
+            sessionBookingRepo.save(sessionBooking);
+        } else {
+            throw new SessionCannotBeBookedException();
+        }
+
+    }
+
+//    public List<SessionBooking> findAmenityByName(String name) {
 //        return sessionBookingRepo.findAmenityByAmenityType(name);
 //    }
-//
+
 //    public void RegisterNewAmenity(Amenity amenity) {
 //
 //        System.out.println("In service\n" + amenity + "\n");
@@ -55,4 +88,4 @@
 //        }
 //        sessionBookingRepo.deleteById(id);
 //    }
-//}
+}

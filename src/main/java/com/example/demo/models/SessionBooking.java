@@ -42,4 +42,11 @@ public class SessionBooking {
     private Set<Subscriber> subscribers = new HashSet<>();
 
 
+    public void setSubscriber(Subscriber subscriber) {
+        subscribers.add(subscriber);
+    }
+
+    public void setSession(Session session) {
+        sessions.add(session);
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.demo.services;
 
+import com.example.demo.DTO.SubscriptionDTO;
 import com.example.demo.exceptions.AmenityNotFoundException;
 import com.example.demo.exceptions.DiscountNotFoundException;
 import com.example.demo.models.Amenity;
@@ -20,8 +21,8 @@ import java.util.stream.Collectors;
 @Service
 public class DiscountService {
     private DiscountRepo discountRepo;
-    @Autowired
-    public DiscountService(AmenityRepo amenityRepo) {
+@Autowired
+    public DiscountService(DiscountRepo discountRepo) {
         this.discountRepo = discountRepo;
     }
 
@@ -33,11 +34,15 @@ public class DiscountService {
         return discountRepo.findAll();
     }
 
-    public List<Discount> findDiscountById(Integer id) {
+    public Discount findDiscountByCouponCode(String couponCode) {
 
-        return discountRepo.findById(id)
-                .stream()
-                .collect(Collectors.toList());
+        return discountRepo.findDiscountByCouponCode(couponCode);
+//                .stream()
+//                 .map(subscription -> new SubscriptionDTO(
+//                        subscription.getCouponCode()
+//                        ))
+//                .collect(Collectors.toList());
+
     }
 
 
@@ -73,6 +78,10 @@ public void UpdateDiscountDetails(Integer id, String couponCode, Integer percent
         discountRepo.deleteById(id);
     }
 
+
+    public Discount getDiscountByCouponCode(String couponCode) {
+    return discountRepo.findDiscountByCouponCode(couponCode);
+    }
 
 
 }

@@ -7,6 +7,7 @@ import com.example.demo.models.Registered_In_Gym;
 import com.example.demo.models.Session;
 import com.example.demo.services.AmenityService;
 import com.example.demo.services.SessionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,10 @@ import java.util.List;
 @RequestMapping("/api/v1/session")
 public class SessionController {
     private SessionService sessionService;
+@Autowired
+    public SessionController(SessionService sessionService) {
+        this.sessionService = sessionService;
+    }
 
     @GetMapping("/find-by-name/{name}")
     public ResponseEntity<List<Session>> findSessionById(@PathVariable Integer id) {

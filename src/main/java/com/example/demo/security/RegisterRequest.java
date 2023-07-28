@@ -15,9 +15,9 @@ public class RegisterRequest {
     private String lname;
     private String email;
     private  String password;
-//    private String BloodType;
-//    private String phoneNo;
-//    private String city;
-//    private String emergencyPhoneNo;
+    private String BloodType;
+    private String phoneNo;
+    private String city;
+    private String emergencyPhoneNo;
     private Role role;
 }

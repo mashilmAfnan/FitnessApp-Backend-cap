@@ -20,7 +20,7 @@ import java.util.Set;
 public class Subscriber {
     //subsc id, subription id , pt id
     @Id
-    @GeneratedValue
+//    @GeneratedValue
     private Integer subscriberId;
   //  private Integer subscription_Id;
     private Integer pt_id;
@@ -46,6 +46,8 @@ public class Subscriber {
     private List<Feedback> feedbacks = new ArrayList<>();
 
 
-
-
+    public void setSusbcriptionId(Integer subscriptionId) {
+        Subscription subscription1 = new Subscription();
+        subscription1.setId(subscriptionId);
+    }
 }

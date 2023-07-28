@@ -57,7 +57,7 @@ public class SessionService {
             sessionRepo.save(session);
         } else {
 
-               throw new SessionNotFoundException();
+               throw new SessionNotFoundException(id);
         }
     }
 
@@ -68,5 +68,15 @@ public class SessionService {
             throw new IllegalStateException("session with id " + id + " does not even exist ");
         }
         sessionRepo.deleteById(id);
+    }
+
+    public Integer findSessionId(Session session) {
+        return session.getId();
+    }
+
+    public Session getSessionById(Integer sessionId) {
+      return sessionRepo.findById(sessionId).orElse(null);
+
+
     }
 }
