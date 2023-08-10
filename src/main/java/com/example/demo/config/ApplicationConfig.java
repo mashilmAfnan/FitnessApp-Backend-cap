@@ -21,7 +21,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class ApplicationConfig {
     private final UserInfoRepo repository;
     @Bean
-
     public UserDetailsService userDetailsService(){
         return username -> repository.findByEmail(username)
                 .orElseThrow(()-> new UsernameNotFoundException(constants.USER_NOT_FOUND));

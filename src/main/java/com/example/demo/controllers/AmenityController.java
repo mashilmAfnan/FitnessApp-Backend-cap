@@ -17,9 +17,7 @@ public class AmenityController {
     public AmenityController(AmenityService amenityService) {
         this.amenityService = amenityService;
     }
-
     private AmenityService amenityService;
-
     @GetMapping("/find-by-name/{name}")
     public ResponseEntity<List<Amenity>> findAmenitiesByName(@PathVariable String name) {
         List<Amenity> amenities = amenityService.findAmenityByName(name);
@@ -37,7 +35,6 @@ public class AmenityController {
       //  System.out.println("\n" + amenity + "\n");
         amenityService.RegisterNewAmenity(amenity);
     }
-
     @PutMapping(path ="/update/{id}")
     public void updateAmenity(
             @PathVariable("id") Integer id,
@@ -46,7 +43,6 @@ public class AmenityController {
       //  System.out.println("\n\n\nHello from update controller");
         amenityService.updateAmenityAvailability(id, availability);
     }
-
     @DeleteMapping("/del/{id}")
     public void deleteAmenity(@PathVariable("id") Integer id)
     {

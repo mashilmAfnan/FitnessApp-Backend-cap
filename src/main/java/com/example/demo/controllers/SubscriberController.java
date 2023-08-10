@@ -17,9 +17,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/subscriber")
 public class SubscriberController {
     @Autowired
-
     private SubscriberService subscriberService;
-
     @GetMapping("/find-by-id/{id}")
     public ResponseEntity<List<Subscriber>> findSubscriberById(@PathVariable Integer id) {
         List<Subscriber> subscribers = subscriberService.findSubscriberById(id).stream().collect(Collectors.toList());

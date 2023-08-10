@@ -1,7 +1,7 @@
 package com.example.demo.exceptions;
 
+import com.example.demo.constants;
+
 public class RoomNotFoundException extends Throwable {
-    public RoomNotFoundException(Integer roomNo) {
-        System.out.println("Room with number " + roomNo + " was not found.");
-    }
+    public RoomNotFoundException(Integer roomNo) { System.out.println(constants.ROOM_NOT_FOUND + roomNo);   }
 }

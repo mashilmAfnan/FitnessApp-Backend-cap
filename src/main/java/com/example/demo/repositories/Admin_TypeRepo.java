@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface Admin_TypeRepo extends JpaRepository<Admin_Type, Integer> {
-    //Optional<Admin_Type> existsByAdmin_type;
+  ;
 }

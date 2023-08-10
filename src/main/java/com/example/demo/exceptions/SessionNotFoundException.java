@@ -1,9 +1,8 @@
 package com.example.demo.exceptions;
 
-public class SessionNotFoundException extends Throwable {
-    //the session you are trying to access is not found.
+import com.example.demo.constants;
 
-    public SessionNotFoundException(Integer id) {
-        System.out.println(" The session you are trying to access was not found. ID: " + id );
+public class SessionNotFoundException extends Throwable {
+        public SessionNotFoundException(Integer id) {  System.out.println(constants.SESSION_NOT_FOUND + id );
     }
 }

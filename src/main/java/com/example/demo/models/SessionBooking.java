@@ -24,8 +24,10 @@ public class SessionBooking {
     @GeneratedValue
     @Column(name="session_booking_id")
     private Integer id;
+
     private LocalDate session_date;
     private LocalTime session_time;
+
     @ManyToMany
     @JoinTable(
             name = "session_booking_session",
@@ -39,8 +41,7 @@ public class SessionBooking {
             joinColumns = @JoinColumn(name = "session_booking_id"),
             inverseJoinColumns = @JoinColumn(name = "subscriber_id")
     )
-    private Set<Subscriber> subscribers = new HashSet<>();
-
+            private Set<Subscriber> subscribers = new HashSet<>();
 
     public void setSubscriber(Subscriber subscriber) {
         subscribers.add(subscriber);

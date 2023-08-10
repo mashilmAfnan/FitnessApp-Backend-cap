@@ -15,7 +15,6 @@ import java.util.List;
 @RequestMapping("/api/v1/room")
 public class RoomController {
     private RoomService roomService;
-
     @GetMapping("/find-by-roomNo/{roomNo}")
     public ResponseEntity<List<Room>> findAmenitiesByRoomNo(@PathVariable Integer roomNo) {
         List<Room> rooms = roomService.findRoomByNo(roomNo);
@@ -31,7 +30,6 @@ public class RoomController {
     {
         roomService.RegisterNewRoom(room);
     }
-
     @PutMapping(path ="/up/{id}")
     public void UpdateRoomAvailability(
             @PathVariable("id") Integer id,
@@ -39,7 +37,6 @@ public class RoomController {
     ) throws AmenityNotFoundException, RoomNotFoundException {
         roomService.updateRoomAvailability(id, availability);
     }
-
     @DeleteMapping("/del/{id}")
     public void deleteRoomById(@PathVariable("id") Integer id)
     {

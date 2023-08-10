@@ -22,23 +22,14 @@ public class Register_In_Gym_Service {
     public Register_In_Gym_Service(Registered_In_GymRepo registeredInGymRepo) {
         this.registeredInGymRepo = registeredInGymRepo;
     }
-
-
-
     public List<Registered_In_Gym> getAllRegisteredAdmins() {
         return registeredInGymRepo.findAll();
     }
-
     //reg by id
     public void RegisterNewAdminInGym(Registered_In_Gym registeredInGym) {
-
-       // System.out.println("In service\n" + amenity + "\n");
-
         registeredInGymRepo.save(registeredInGym);
     }
-
     public void deleteRegisteredAdminById(Integer id) {
-
         boolean exists = registeredInGymRepo.existsById(id);
         if (!exists) {
             throw new IllegalStateException("No admin with this id " + id + " is registered. ");

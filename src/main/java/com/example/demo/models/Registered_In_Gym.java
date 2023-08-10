@@ -14,12 +14,13 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Registered_In_Gym")
+@Table(name = "Registered_In_Gym")   //check if we are getting a different admin id
 public class Registered_In_Gym {
-    //both are fks
+    //both admin_id and place_id are fks
     @Id
     @GeneratedValue
     private Integer admin_id;
+
     private  Integer place_id;
     @ManyToMany
     @JoinTable(

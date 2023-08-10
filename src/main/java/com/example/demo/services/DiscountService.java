@@ -25,29 +25,16 @@ public class DiscountService {
     public DiscountService(DiscountRepo discountRepo) {
         this.discountRepo = discountRepo;
     }
-
     public void RegisterNewDiscount(Discount discount) {
-
         discountRepo.save(discount);
     }
     public List<Discount> getAllDiscounts() {
         return discountRepo.findAll();
     }
-
     public Discount findDiscountByCouponCode(String couponCode) {
-
-        return discountRepo.findDiscountByCouponCode(couponCode);
-//                .stream()
-//                 .map(subscription -> new SubscriptionDTO(
-//                        subscription.getCouponCode()
-//                        ))
-//                .collect(Collectors.toList());
-
-    }
-
-
+        return discountRepo.findDiscountByCouponCode(couponCode);    }
    @Transactional
-public void UpdateDiscountDetails(Integer id, String couponCode, Integer percentage) throws DiscountNotFoundException {
+    public void UpdateDiscountDetails(Integer id, String couponCode, Integer percentage) throws DiscountNotFoundException {
        Optional <Discount> optionalDiscount = discountRepo.findById(id);
           //.orElseThrow(()-> new IllegalStateException("DISCOUNT WITH THIS ID DOES NOT EXIST"));
         if (optionalDiscount.isPresent()) {
@@ -57,28 +44,21 @@ public void UpdateDiscountDetails(Integer id, String couponCode, Integer percent
              couponCode.length() <=5 &&
             !Objects.equals(couponCode, discount.getCouponCode())){
                 discount.setCouponCode(couponCode);
-            }
-            if (percentage!= null &&
+            } if (percentage!= null &&
                percentage>0){
                 discount.setPercentage(percentage);
             }
             discountRepo.save(discount);
         } else {
-
             throw new DiscountNotFoundException(id);
-        }
-  }
-
+        } }
     public void DeleteDiscountById(Integer id) throws DiscountNotFoundException {
-
         boolean exists = discountRepo.existsById(id);
         if (!exists) {
             throw new DiscountNotFoundException(id);
         }
         discountRepo.deleteById(id);
     }
-
-
     public Discount getDiscountByCouponCode(String couponCode) {
     return discountRepo.findDiscountByCouponCode(couponCode);
     }

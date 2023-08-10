@@ -1,5 +1,6 @@
 package com.example.demo.models;
 
+import com.example.demo.enums.TypeOfAdmin;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class Admin_Type {
     @Id
     @GeneratedValue
     private Integer id;
+
     private TypeOfAdmin admin_type;
 
     @OneToMany(mappedBy = "adminType", cascade = CascadeType.ALL)

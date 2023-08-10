@@ -20,10 +20,11 @@ import java.util.Set;
 public class Amenity {
     @Id
     @GeneratedValue
-
     private Integer id;
+
     private String type;
     private Boolean availability;
+
     @ManyToMany
     private Set<PlaceOfService> place = new HashSet<>();
 

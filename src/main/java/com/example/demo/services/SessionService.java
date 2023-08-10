@@ -21,30 +21,20 @@ import java.util.Optional;
 @Service
 public class SessionService {
     private SessionRepo sessionRepo;
-
-
-
     @Autowired
     public SessionService(SessionRepo sessionRepo) {
         this.sessionRepo = sessionRepo;
     }
-
     public List<Session> findSessionById(Integer id) {
         return sessionRepo.findById(id).stream().toList();
     }
-
-    public void RegisterNewSession(Session session) {
-
-        sessionRepo.save(session);
-    }
+    public void RegisterNewSession(Session session) {    sessionRepo.save(session);   }
     public List<Session> getAllSessions() {
         return sessionRepo.findAll();
     }
-
     @Transactional
     public void updateSession(Integer id, LocalDate date, LocalTime time) throws SessionNotFoundException {
         Optional<Session> optionalSession = sessionRepo.findById(id);
-
         if (optionalSession.isPresent()) {
             Session session = optionalSession.get();
             if (date!= null &&
@@ -53,30 +43,20 @@ public class SessionService {
             if (time!= null &&
                     !Objects.equals(time, session.getSession_time()))
                 session.setSession_time(time);
-         //   amenity.setAvailability(availability);
-            sessionRepo.save(session);
+                sessionRepo.save(session);
         } else {
-
                throw new SessionNotFoundException(id);
-        }
-    }
-
+        }  }
     public void deleteSessionById(Integer id) {
-
         boolean exists = sessionRepo.existsById(id);
         if (!exists) {
             throw new IllegalStateException("session with id " + id + " does not even exist ");
         }
         sessionRepo.deleteById(id);
     }
-
     public Integer findSessionId(Session session) {
         return session.getId();
     }
-
     public Session getSessionById(Integer sessionId) {
       return sessionRepo.findById(sessionId).orElse(null);
-
-
-    }
-}
+    }}

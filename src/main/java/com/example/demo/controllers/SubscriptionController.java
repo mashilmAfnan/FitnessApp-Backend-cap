@@ -15,7 +15,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/subscription")
 public class SubscriptionController {
-
     private SubscriptionService subscriptionService;
 @Autowired
     public SubscriptionController(SubscriptionService subscriptionService) {
@@ -30,12 +29,8 @@ public class SubscriptionController {
     @PostMapping("/add-subscription") //throw an exception for any error that could ocur
     public void registerNewSubscription(@RequestBody SubscriptionDTO subscriptionDTO)
     {
-
         subscriptionService.addSubscription(subscriptionDTO);
     }
-
-
-
 //    @DeleteMapping("/del/{id}")
 //    public void deleteSubscriptionById(@PathVariable("id") Integer id)
 //    {

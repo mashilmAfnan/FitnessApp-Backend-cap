@@ -20,8 +20,10 @@ public class Package {
     @Id
     @GeneratedValue
     private Integer id;
+
     @JsonProperty("type")
     private String type;
+
     @JsonProperty("price")
     private Double price;
 

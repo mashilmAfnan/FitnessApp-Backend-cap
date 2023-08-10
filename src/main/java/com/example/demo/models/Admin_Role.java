@@ -15,10 +15,9 @@ import java.util.List;
 @Entity
 @Table(name = "Admin_Role")
 public class Admin_Role {
-@Id
-@Column(name = "user_info_id")
-private Integer id;
-
+    @Id
+    @Column(name = "user_info_id")
+    private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="admin_id")
@@ -35,6 +34,4 @@ private Integer id;
             inverseJoinColumns = @JoinColumn(name = "placeofservice_id")
     )
     private List<PlaceOfService> placesOfService = new ArrayList<>();
-
-
 }

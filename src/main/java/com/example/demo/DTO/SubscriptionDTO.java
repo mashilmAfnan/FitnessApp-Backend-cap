@@ -7,15 +7,14 @@ import com.example.demo.services.DiscountService;
 import lombok.*;
 
 import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class SubscriptionDTO implements Serializable {
-  private   Integer userId;
+    private Integer userId;
     private Integer packageId;
     private String couponCode;
-
-
     public static SubscriptionDTO mapFromUserRolePackageDiscount(UserRole userRole, Package pack, Discount discount) {
         SubscriptionDTO subscriptionDTO = new SubscriptionDTO();
         subscriptionDTO.setUserId(userRole.getId());

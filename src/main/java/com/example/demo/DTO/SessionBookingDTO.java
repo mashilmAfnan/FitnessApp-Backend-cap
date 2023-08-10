@@ -14,7 +14,6 @@ import java.io.Serializable;
 public class SessionBookingDTO implements Serializable {
     private  Integer subscriberId;
     private  Integer sessionId;
-
     public static SessionBookingDTO mapFromSubscriberSession(Session session, Subscriber subscriber)
     {
         SessionBookingDTO sessionBookingDTO = new SessionBookingDTO();

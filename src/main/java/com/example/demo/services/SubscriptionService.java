@@ -47,7 +47,6 @@ public void addSubscription(SubscriptionDTO subscriptionDTO) {
     Integer userId = subscriptionDTO.getUserId();
     Integer packageId = subscriptionDTO.getPackageId();
     String couponCode = subscriptionDTO.getCouponCode();
-
     if (userId!= null && packageId!= null) {
         UserRole user = userInfoService.getUserById(userId);
         Package pack = packageService.getPackageById(packageId);
@@ -56,16 +55,11 @@ public void addSubscription(SubscriptionDTO subscriptionDTO) {
         if (couponCode!= null){
             Discount discount = discountService.getDiscountByCouponCode(couponCode);
             subscription.setDiscount(discount);
-        }
-        else {
+        } else {
             subscription.setDiscount(null);
-//            Discount NoDiscount = new Discount();
-//            NoDiscount.setPercentage(0);
         }  subscriptionRepo.save(subscription);
               SubscriberService.AddSubscriberId(userId, subscription.getId()); //save the user to the subscriber table.
-    }
-
-}
+    }}
 
 //    public void deleteSubscriptionById(Integer id) {
 //

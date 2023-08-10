@@ -11,14 +11,6 @@ import com.example.demo.repositories.AmenityRepo;
 import com.example.demo.repositories.SessionBookingRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.beans.Transient;
-import java.util.List;
-import java.util.Optional;
-
-import static java.lang.Character.getType;
-
 @Service
 public class SessionBookingService {
     private final SessionBookingRepo sessionBookingRepo;
@@ -30,16 +22,9 @@ public class SessionBookingService {
         this.subscriberService = subscriberService;
         this.sessionService = sessionService;
     }
-
-
-
-
-
     public void subscriberBookSession(SessionBookingDTO sessionBookingDTO) throws SessionCannotBeBookedException {
   Integer sessionId = sessionBookingDTO.getSessionId();
   Integer subscriberId = sessionBookingDTO.getSubscriberId();
-
-//id not the whole thing!
         if (subscriberId != null && sessionId != null) {
            Subscriber subscriber = subscriberService.getSubscriberById(subscriberId);
            Session session = sessionService.getSessionById(sessionId);

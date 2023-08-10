@@ -6,13 +6,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum Permission {
     //sadmin
-   // Super_ADMIN_ADD_ADMIN("super_admin:add_admin"),
+   Super_ADMIN_ADD_ADMIN("super_admin:add_admin"),
     Super_ADMIN_ADD_ADMIN_TYPE("super_admin:add_admin_type"),
     SUPER_ADMIN_VIEW_AMENTIES("super_admin:view_amenities"),
     Super_ADMIN_DELETE_ADMIN("super_admin:delete_admin"),
     Super_ADMIN_UPDATE_ADMIN("super_admin:update_admin"),
     SUPER_ADMIN_VIEW_ROOMS("super_admin:view_rooms"),
-
     SUPER_ADMIN_VIEW_PACKAGES("super_admin:view_packages"),
     SUPER_ADMIN_VIEW_DISCOUNTS("super_admin:view_discounts"),
     SUPER_ADMIN_VIEW_SUBSCRIBERS("super_admin:view_subscribers"),

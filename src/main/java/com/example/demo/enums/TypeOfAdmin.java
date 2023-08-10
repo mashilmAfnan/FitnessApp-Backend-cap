@@ -1,11 +1,6 @@
 package com.example.demo.enums;
 
-import com.example.demo.security.Permission;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-
-import java.util.Set;
 
 @RequiredArgsConstructor
 //@NoArgsConstructor

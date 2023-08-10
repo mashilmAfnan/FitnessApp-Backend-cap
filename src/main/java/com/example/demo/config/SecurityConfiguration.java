@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-;import static com.example.demo.security.Permission.USER_UPDATE_INFO;
+;import static com.example.demo.enums.Permission.USER_UPDATE_INFO;
 import static org.springframework.http.HttpMethod.*;
 
 @Configuration
@@ -30,7 +30,6 @@ public class SecurityConfiguration {
 //    private final TokenBlacklist tokenBlacklist;
 //    private final   TokenValidationFilter tokenValidationFilter;
 
-//.requestMatchers("/api/v1/auth/**").hasAnyRole(SUPER_ADMIN.name())
  @Bean
 public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http
@@ -39,14 +38,20 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
         .authorizeRequests()
             .requestMatchers(requestMatcher("/api/v1/auth/**"))
             .permitAll()
-            .antMatchers("/api/v1/auth/**").permitAll()
-            .antMatchers("/api/v1/user/**").permitAll()
-            .antMatchers(GET, "/api/v1/place/**").permitAll()
-            .antMatchers("/api/v1/admin-type/**").hasAnyRole("SUPERADMIN")
-            .antMatchers(POST, "/api/v1/place/**").hasAnyRole("SUPERADMIN")
-            .antMatchers(DELETE, "/api/v1/place/**").hasAnyRole("SUPERADMIN")
-            .antMatchers("/api/v1/discount/**").hasAnyRole("SUPERADMIN", "ADMIN")
-            .antMatchers(GET, "/api/v1/feedback/**").hasAnyRole("SUPERADMIN", "ADMIN")
+            .antMatchers("/api/v1/user/**")
+            .permitAll()
+            .antMatchers(GET, "/api/v1/place/**")
+            .permitAll()
+            .antMatchers("/api/v1/admin-type/**")
+            .hasAnyRole("SUPERADMIN")
+            .antMatchers(POST, "/api/v1/place/**")
+            .hasAnyRole("SUPERADMIN")
+            .antMatchers(DELETE, "/api/v1/place/**")
+            .hasAnyRole("SUPERADMIN")
+            .antMatchers("/api/v1/discount/**")
+            .hasAnyRole("SUPERADMIN", "ADMIN")
+            .antMatchers(GET, "/api/v1/feedback/**")
+            .hasAnyRole("SUPERADMIN", "ADMIN")
             .antMatchers(DELETE, "/api/v1/feedback/**").hasAnyRole("SUPERADMIN", "ADMIN")
             .antMatchers("/api/v1/package/**").hasAnyRole("SUPERADMIN", "ADMIN")
             .antMatchers("/api/v1/room/**").hasAnyRole("SUPERADMIN", "ADMIN")
@@ -73,17 +78,11 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
             .and()
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
-
-
     http.cors().disable();
     http.csrf().disable();
-
     return http.build();
 }
-
-
-    private RequestMatcher requestMatcher(String pathPattern) {
+private RequestMatcher requestMatcher(String pathPattern) {
         return new AntPathRequestMatcher(pathPattern);
     }
 

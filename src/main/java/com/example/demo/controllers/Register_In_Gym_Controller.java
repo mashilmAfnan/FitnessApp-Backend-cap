@@ -25,19 +25,8 @@ public class Register_In_Gym_Controller {
     @PostMapping("/reg-admin")
     public void RegisterNewAmenity(@RequestBody Registered_In_Gym registerAdmin)
     {
-
         registerInGymService.RegisterNewAdminInGym(registerAdmin);
     }
-
-//    @PutMapping(path ="/update/{id}")
-//    public void updateAmenity(
-//            @PathVariable("id") Integer id,
-//            @RequestParam(required = false) Boolean availability
-//    ) throws AmenityNotFoundException {
-//        System.out.println("\n\n\nHello from update controller");
-//        amenityService.updateAmenityAvailability(id, availability);
-//    }
-
     @DeleteMapping("/del/{id}")
     public void deleteAmenity(@PathVariable("id") Integer id)
     {

@@ -20,20 +20,13 @@ import java.util.Set;
 public class Subscriber {
     //subsc id, subription id , pt id
     @Id
-//    @GeneratedValue
     private Integer subscriberId;
-  //  private Integer subscription_Id;
+
     private Integer pt_id;
-
-
-
-
 
     @OneToOne
     @JoinColumn(name = "subscription_id", insertable = false, updatable = false)
     private Subscription subscription;
-
-
 
     @ManyToMany(mappedBy = "subscribers")
     private Set<SessionBooking> sessionBookings = new HashSet<>();
@@ -44,7 +37,6 @@ public class Subscriber {
 
     @OneToMany(mappedBy = "subscriber")
     private List<Feedback> feedbacks = new ArrayList<>();
-
 
     public void setSusbcriptionId(Integer subscriptionId) {
         Subscription subscription1 = new Subscription();

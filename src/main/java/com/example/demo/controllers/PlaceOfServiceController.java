@@ -21,7 +21,6 @@ public class PlaceOfServiceController {
     public PlaceOfServiceController(PlaceOfServiceService placeOfServiceService) {
         this.placeOfServiceService = placeOfServiceService;
     }
-
     @GetMapping("/find-by-name/{name}")
     public ResponseEntity<List<PlaceOfService>> findPlaceOfServiceByName(@PathVariable String name) {
         List<PlaceOfService> places = placeOfServiceService.findPlaceOfServiceByName(name);
@@ -37,7 +36,7 @@ public class PlaceOfServiceController {
     {
         placeOfServiceService.RegisterNewPlace(placeOfService);
     }
-//update place of service
+//update place of service data
     @PutMapping(path ="/update/{id}")
     public void updatePlaceData(
             @PathVariable("id") Integer id,
@@ -46,7 +45,6 @@ public class PlaceOfServiceController {
     ) throws PlaceNotFoundException {
         placeOfServiceService.UpdatePlaceData(id, name, location);
     }
-
     @DeleteMapping("/del/{id}")
     public void deletePlaceById(@PathVariable("id") Integer id)
     {

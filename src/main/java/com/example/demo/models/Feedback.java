@@ -20,6 +20,7 @@ public class Feedback {
     @Id
     @GeneratedValue
     private  Integer id;
+
     private String content;
     private LocalDate date;
 

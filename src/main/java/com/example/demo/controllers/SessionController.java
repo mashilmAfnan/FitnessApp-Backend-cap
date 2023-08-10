@@ -23,7 +23,6 @@ public class SessionController {
     public SessionController(SessionService sessionService) {
         this.sessionService = sessionService;
     }
-
     @GetMapping("/find-by-name/{name}")
     public ResponseEntity<List<Session>> findSessionById(@PathVariable Integer id) {
         List<Session> sessions = sessionService.findSessionById(id);
@@ -39,7 +38,6 @@ public class SessionController {
     {
         sessionService.RegisterNewSession(session);
     }
-
     @PutMapping(path ="/update/{id}")
     public void updateSession(
             @PathVariable("id") Integer id,
@@ -49,7 +47,6 @@ public class SessionController {
             ) throws SessionNotFoundException {
         sessionService.updateSession(id, date, time);
     }
-
     @DeleteMapping("/del/{id}")
     public void DeleteSessionById(@PathVariable("id") Integer id)
     {

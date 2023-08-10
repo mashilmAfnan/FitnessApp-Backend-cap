@@ -1,6 +1,6 @@
 package com.example.demo.security;
 
-import com.example.demo.models.Role;
+import com.example.demo.enums.RoleMain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,9 +15,9 @@ public class RegisterRequest {
     private String lname;
     private String email;
     private  String password;
-    private String BloodType;
+    private String bloodType;
     private String phoneNo;
     private String city;
     private String emergencyPhoneNo;
-    private Role role;
+    private RoleMain role;
 }

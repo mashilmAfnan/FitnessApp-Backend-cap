@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.exceptions.AmenityNotFoundException;
+import com.example.demo.exceptions.FeedbackNotFoundException;
 import com.example.demo.models.Amenity;
 import com.example.demo.models.Feedback;
 import com.example.demo.services.AmenityService;
@@ -14,11 +15,9 @@ import java.util.List;
 @RequestMapping("/api/v1/feedback")
 public class FeedbackController {
     private FeedbackService feedbackService;
-
     public FeedbackController(FeedbackService feedbackService) {
         this.feedbackService = feedbackService;
     }
-
     @PostMapping("/add-feedback")
     public void RegisterNewFeedback(@RequestBody Feedback feedback)
     {
@@ -30,15 +29,11 @@ public class FeedbackController {
         return ResponseEntity.ok(feedbacks);
     }
 
-
-    //delete a feedback if it is reported
+    //delete a feedback if it is reported (not implemented)
     @DeleteMapping("/del/{id}")
-    public void deleteFeedbackById(@PathVariable("id") Integer id)
-    {
+    public void deleteFeedbackById(@PathVariable("id") Integer id) throws FeedbackNotFoundException {
         feedbackService.DeleteFeedbackById(id);
     }
-
-    //how to display feedbacks on the website? leave for frontend
 }
 
 

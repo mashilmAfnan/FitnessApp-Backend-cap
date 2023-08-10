@@ -13,8 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/package")
 public class PackageController {
-
-
     private PackageService packageService;
     @Autowired
     public PackageController(PackageService packageService) {
@@ -35,8 +33,6 @@ public class PackageController {
     {
         packageService.RegisterNewPackage(pack);
     }
-
-
     @PutMapping(path ="/update/{id}")
     public void UpdatePackage(
             @PathVariable("id") Integer id,
@@ -46,7 +42,6 @@ public class PackageController {
         System.out.println("\n\n\n Hello from update package controller");
         packageService.UpdatePackage(id, type, price);
     }
-
     @DeleteMapping("/del/{id}")
     public void DeletePackageById(@PathVariable("id") Integer id)
     {

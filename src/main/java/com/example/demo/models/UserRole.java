@@ -20,6 +20,7 @@ public class UserRole {
     @Id
     @Column(name = "user_info_id")
     private Integer id;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private RoleInfo userInfo;
@@ -30,9 +31,9 @@ public class UserRole {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "subscription_id")
     )
-    private List<Subscription> subscriptions;
+             private List<Subscription> subscriptions;
 
     @OneToMany(mappedBy = "user")
-    private List<Subscriber> subscribers = new ArrayList<>();
+             private List<Subscriber> subscribers = new ArrayList<>();
 
 }

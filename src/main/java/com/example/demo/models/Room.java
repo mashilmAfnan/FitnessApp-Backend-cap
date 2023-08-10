@@ -21,9 +21,11 @@ public class Room {
     @GeneratedValue
     @Column(name = "room_no")
     private Integer roomNo;
+
     private String purpose;
     private Integer capacity;
     private  Boolean availability;
+
     @ManyToMany
     @JoinTable(
             name = "room_session",

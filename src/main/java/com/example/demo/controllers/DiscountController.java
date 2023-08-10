@@ -26,7 +26,6 @@ public class DiscountController {
     public DiscountController(DiscountService discountService) {
         this.discountService = discountService;
     }
-
     @PostMapping("/add-discount")
     public void RegisterNewDiscount(@RequestBody Discount discount)
     {
@@ -42,8 +41,6 @@ public class DiscountController {
         List<Discount> discounts = discountService.getAllDiscounts();
         return ResponseEntity.ok(discounts);
     }
-
-
     @PutMapping(path ="/update/{id}")
     public void UpdateDiscount(
             @PathVariable("id") Integer id,
@@ -53,7 +50,6 @@ public class DiscountController {
     ) throws  DiscountNotFoundException {
         discountService.UpdateDiscountDetails(id, coupon_code, percentage);
     }
-
     @DeleteMapping("/del/{id}")
     public void DeleteDiscountById(@PathVariable("id") Integer id) throws DiscountNotFoundException {
         discountService.DeleteDiscountById(id);

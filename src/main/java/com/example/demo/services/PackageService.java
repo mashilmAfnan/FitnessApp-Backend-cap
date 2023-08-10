@@ -22,30 +22,25 @@ public class PackageService {
     public PackageService(PackageRepo packageRepo) {
         this.packageRepo = packageRepo;
     }
-
     public Package FindPackageById(Integer id) {
         return packageRepo.findById(id).orElse(null);
     }
     public List<Package> getAllPackages() {
         return packageRepo.findAll();
     }
-
     public void RegisterNewPackage(Package pack) {
         packageRepo.save(pack);
     }
     @Transactional
-public void UpdatePackage(Integer id, String type, Double price) throws PackageNotFoundException {
-        System.out.println("\n\n\n Hello from update package service");
+    public void UpdatePackage(Integer id, String type, Double price) throws PackageNotFoundException {
+
         Optional<Package> optionalPackage = packageRepo.findById(id);
         if (optionalPackage.isPresent()) {
-            System.out.println("\n\n\nHello I am present");
-            Package pack = optionalPackage.get();
-//            if (price!= null &&
-//                    price>0){
-                System.out.println("\n\n\n Hello from update package price");
+                    Package pack = optionalPackage.get();
+            if (price!= null &&
+                    price>0){
                 pack.setPrice(price);
-//            }
-            if (type!= null &&
+            }if (type!= null &&
                     type.length()>0 &&
                     !Objects.equals(type, pack.getType())){
                 pack.setType(type);
@@ -62,8 +57,6 @@ public void UpdatePackage(Integer id, String type, Double price) throws PackageN
         }
         packageRepo.deleteById(id);
     }
-
-
     public Package getPackageById(Integer packageId) {
         return packageRepo.findById(packageId).orElse(null);
     }

@@ -28,9 +28,7 @@ public class JwtService {
     public <T> T extractClaim(String token, Function<Claims, T> claimResolver){
      final Claims claims = extractAllClaims(token);
      return claimResolver.apply(claims);
-
     }
-
     private Claims extractAllClaims(String token)
     {
         return Jwts
@@ -39,7 +37,6 @@ public class JwtService {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-
     }
     public String generateToken(UserDetails userDetails){
         Map<String, Object> extraClaims = new HashMap<>();
@@ -50,8 +47,6 @@ public class JwtService {
             extraClaims.put("role", roleInfo.getRole().name());
           //  System.out.println("**********************role info:  " + roleInfo.toString());
         }
-
-
         return generateToken(extraClaims, userDetails);
        // return generateToken(new HashMap<>(), userDetails);
     }
@@ -86,28 +81,14 @@ public class JwtService {
         final String username =extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
-
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
-
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
-
-
     private Key getSignInKey() {
         byte[] keyBytes = Decoders.BASE64.decode(constants.SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
-
-//    public String generateNewAccessToken(String refreshToken) {
-//        // Validate the refresh token (check if it's not expired and hasn't been blacklisted)
-//
-//        // If the refresh token is valid, extract the UserDetails from it
-//        UserDetails userDetails = extractUserDetailsFromRefreshToken(refreshToken);
-//
-//        // Generate a new access token with a new expiration time
-//        return generateToken(userDetails);
-//    }
 }

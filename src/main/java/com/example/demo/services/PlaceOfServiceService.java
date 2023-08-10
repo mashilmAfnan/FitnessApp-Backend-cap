@@ -19,8 +19,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class PlaceOfServiceService {
-
-
     private PlaceOfServiceRepo placeOfServiceRepo;
     @Autowired
     public PlaceOfServiceService(PlaceOfServiceRepo placeOfServiceRepo) {
@@ -33,9 +31,7 @@ public class PlaceOfServiceService {
     public List<PlaceOfService> getAllPlaces() {
         return placeOfServiceRepo.findAll();
     }
-
     public void RegisterNewPlace(PlaceOfService placeOfService) {
-
         placeOfServiceRepo.save(placeOfService);
     }
     //update plac edata insert logic
@@ -54,17 +50,13 @@ public class PlaceOfServiceService {
                 placeOfService.setLocation(location);
             placeOfServiceRepo.save(placeOfService);
         } else {
-
             throw new PlaceNotFoundException(id);
         }
     }
-
     public void deletePlaceById(Integer id) {
-
         boolean exists = placeOfServiceRepo.existsById(id);
         if (!exists) {
             throw new IllegalStateException("Place with id " + id + " does not even exist ");
         }
         placeOfServiceRepo.deleteById(id);
-    }
-}
+    }}
