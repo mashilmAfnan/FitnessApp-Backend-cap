@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EmailService implements EmailServiceInterface {
-
     @Autowired
     private JavaMailSender mailSender;
-
     @Override
     public void sendRegistrationConfirmationEmail(String to, String username) {
         SimpleMailMessage message = new SimpleMailMessage();

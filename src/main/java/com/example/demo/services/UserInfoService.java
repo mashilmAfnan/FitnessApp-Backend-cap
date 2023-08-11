@@ -29,45 +29,64 @@ public class UserInfoService {
 
         this.userProfileDataDTO = userProfileDataDTO;
     }
-    public void UpdateRoleInfoByEmail(String email, String fname, String lname, String password, String bloodType, String phoneNo, String city, String emergencyPhoneNo) {
-        Optional<RoleInfo> optionalUserInfo = userInfoRepo.findByEmail(email);
-        if(optionalUserInfo.isPresent()){
-            RoleInfo userInfo = optionalUserInfo.get();
-            if(fname!=null &&
-            fname.length()>0 &&
-            !Objects.equals(fname, userInfo.getFname()))
-                userInfo.setFname(fname);
-            if(lname!=null &&
-                    lname.length()>0 &&
-                    !Objects.equals(lname, userInfo.getLname()))
-                userInfo.setLname(lname);
-            if(password!=null &&
-                    password.length()>8 &&
-                    !Objects.equals(password, userInfo.getPassword()))
-                userInfo.setPassword(password);
-            if(bloodType!= null &&
-            bloodType.length()>=0 &&
-            !Objects.equals(bloodType, userInfo.getBloodType()) ) {
-                userInfo.setBloodType(bloodType);
-            } if (phoneNo!= null &&
-            phoneNo.length()>4 &&
-            !Objects.equals(phoneNo, userInfo.getPhoneNo())){
-                userInfo.setPhoneNo(phoneNo);
-            } if (city!= null &&
-            city.length()>0 &&
-            !Objects.equals(city, userInfo.getCity())) {
-                userInfo.setCity(city);
-            }  if (emergencyPhoneNo!= null &&
-                    emergencyPhoneNo.length()>4 &&
-                    !Objects.equals(emergencyPhoneNo, userInfo.getEmergencyPhoneNo())) {
-                userInfo.setEmergencyPhoneNo(emergencyPhoneNo);
-            }
-            userInfoRepo.save(userInfo);
-            }   else {
-            throw new UsernameNotFoundException(email);
-        } }
+//    public void UpdateRoleInfoByEmail(String email, String fname, String lname, String password, String bloodType, String phoneNo, String city, String emergencyPhoneNo) {
+//        Optional<RoleInfo> optionalUserInfo = userInfoRepo.findByEmail(email);
+//        if(optionalUserInfo.isPresent()){
+//            RoleInfo userInfo = optionalUserInfo.get();
+//            if(fname!=null &&
+//            fname.length()>0 &&
+//            !Objects.equals(fname, userInfo.getFname()))
+//                userInfo.setFname(fname);
+//            if(lname!=null &&
+//                    lname.length()>0 &&
+//                    !Objects.equals(lname, userInfo.getLname()))
+//                userInfo.setLname(lname);
+//            if(password!=null &&
+//                    password.length()>8 &&
+//                    !Objects.equals(password, userInfo.getPassword()))
+//                userInfo.setPassword(password);
+//            if(bloodType!= null &&
+//            bloodType.length()>=0 &&
+//            !Objects.equals(bloodType, userInfo.getBloodType()) ) {
+//                userInfo.setBloodType(bloodType);
+//            } if (phoneNo!= null &&
+//            phoneNo.length()>4 &&
+//            !Objects.equals(phoneNo, userInfo.getPhoneNo())){
+//                userInfo.setPhoneNo(phoneNo);
+//            } if (city!= null &&
+//            city.length()>0 &&
+//            !Objects.equals(city, userInfo.getCity())) {
+//                userInfo.setCity(city);
+//            }  if (emergencyPhoneNo!= null &&
+//                    emergencyPhoneNo.length()>4 &&
+//                    !Objects.equals(emergencyPhoneNo, userInfo.getEmergencyPhoneNo())) {
+//                userInfo.setEmergencyPhoneNo(emergencyPhoneNo);
+//            }
+//            userInfoRepo.save(userInfo);
+//            }   else {
+//            throw new UsernameNotFoundException(email);
+//        } }
+        public void updateRoleInfoByEmail(UserProfileDataDTO userProfileDataDTO) {
+            Optional<RoleInfo> optionalUserInfo = userInfoRepo.findByEmail(userProfileDataDTO.getEmail());
+            if (optionalUserInfo.isPresent()) {
+                RoleInfo userInfo = optionalUserInfo.get();
 
-    public UserProfileDataDTO getUserDTOById(Integer userId) throws UserNotFoundException {
+                // Update the fields from the DTO
+                userInfo.setFname(userProfileDataDTO.getFname());
+                userInfo.setLname(userProfileDataDTO.getLname());
+                userInfo.setBloodType(userProfileDataDTO.getBloodType());
+                userInfo.setCity(userProfileDataDTO.getCity());
+                userInfo.setPhoneNo(userProfileDataDTO.getPhoneNo());
+                userInfo.setEmergencyPhoneNo(userProfileDataDTO.getEmergencyPhoneNo());
+
+                userInfoRepo.save(userInfo);
+            } else {
+                throw new UsernameNotFoundException(userProfileDataDTO.getEmail());
+            }
+        }
+
+
+        public UserProfileDataDTO getUserDTOById(Integer userId) throws UserNotFoundException {
         Optional<RoleInfo> userInfoOptional = userInfoRepo.findById(userId);
 
         if (userInfoOptional.isPresent()) {
